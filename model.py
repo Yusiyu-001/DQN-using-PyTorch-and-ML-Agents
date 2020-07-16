@@ -1,11 +1,6 @@
 """
 Example Neural Network Model for Vector Observation DQN Agent
 DQN Model for Unity ML-Agents Environments using PyTorch
-
-Example Developed By:
-Michael Richardson, 2018
-Project for Udacity Danaodgree in Deep Reinforcement Learning (DRL)
-Code expanded and adapted from code examples provided by Udacity DRL Team, 2018.
 """
 
 import torch
