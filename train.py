@@ -1,22 +1,4 @@
 
-"""
-DQN for Unity ML-Agents Environments using PyTorch
-Includes examples of the following DQN training algorithms:
-  -> Vanilla DNQ, 
-  -> Double-DQN (DDQN)
-
-The example uses a modified version of the Unity ML-Agents Banana Collection Example Environment.
-The environment includes a single agent, who can turn left or right and move forward or backward.
-The agent's task is to collect yellow bananas (reward of +1) that are scattered around an square
-game area, while avoiding purple bananas (reward of -1). For the version of Bananas employed here,
-the environment is considered solved when the average score over the last 100 episodes > 13. 
-
-Example Developed By:
-Michael Richardson, 2018
-Project for Udacity Danaodgree in Deep Reinforcement Learning (DRL)
-Code Expanded and Adapted from Code provided by Udacity DRL Team, 2018.
-"""
-
 ###################################
 # Import Required Packages
 import torch
@@ -54,22 +36,18 @@ solved_score = 14
 STEP 2: Start the Unity Environment
 # Use the corresponding call depending on your operating system 
 """
-env = UnityEnvironment(file_name="Banana.app")
+env = UnityEnvironment(file_name="Unity3dtrainingVR.exe")
 # - **Mac**: "Banana.app"
 # - **Windows** (x86): "Banana_Windows_x86/Banana.exe"
 # - **Windows** (x86_64): "Banana_Windows_x86_64/Banana.exe"
-# - **Linux** (x86): "Banana_Linux/Banana.x86"
-# - **Linux** (x86_64): "Banana_Linux/Banana.x86_64"
-# - **Linux** (x86, headless): "Banana_Linux_NoVis/Banana.x86"
-# - **Linux** (x86_64, headless): "Banana_Linux_NoVis/Banana.x86_64"
-
+#原始环境：这里替换成水面训练环境文件
 """
 #######################################
 STEP 3: Get The Unity Environment Brian
 Unity ML-Agent applications or Environments contain "BRAINS" which are responsible for deciding 
 the actions an agent or set of agents should take given a current set of environment (state) 
-observations. The Banana environment has a single Brian, thus, we just need to access the first brain 
-available (i.e., the default brain). We then set the default brain as the brain that will be controlled.
+observations.We just need to access the first brain available (i.e., the default brain).
+We then set the default brain as the brain that will be controlled.
 """
 # Get the default brain 
 brain_name = env.brain_names[0]
@@ -85,14 +63,14 @@ STEP 4: Determine the size of the Action and State Spaces
 # The simulation contains a single agent that navigates a large environment.  
 # At each time step, it can perform four possible actions:
 # - `0` - walk forward 
-# - `1` - walk backward
+# - `1` - stay still
 # - `2` - turn left
 # - `3` - turn right
-# 
+# 根据无人船的特性，动作空间设置为（前进，静止，左转，右转）
 # The state space has `37` dimensions and contains the agent's velocity, 
 # along with ray-based perception of objects around agent's forward direction.  
-# A reward of `+1` is provided for collecting a yellow banana, and a reward of 
-# `-1` is provided for collecting a purple banana. 
+# A reward of `+10` is provided for achiving destination, and a reward of 
+# `-10` is provided for collision. 
 """
 
 # Set the number of actions or action size
